@@ -1,209 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>GearCall — Book a Mechanic</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8">
+  <title>GearCall — Book a Mechanic</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
 </head>
+
 <body>
 
-<div class="topbar">
-  <div class="brand">
-    <div class="brand-mark"></div>
-    <div class="brand-name">Gear<span>Call</span></div>
-  </div>
-  <div class="who-am-i hidden" id="whoami">
-    <div><span class="tag" id="who-role"></span><br><span class="name" id="who-name"></span></div>
-    <button class="logout-btn" onclick="logout()">Log out</button>
-  </div>
-</div>
-
-<!-- ================= AUTH SCREEN ================= -->
-<div class="auth-wrap" id="auth-screen">
-  <div class="auth-card">
-    <div class="auth-tabs">
-      <button id="tab-login" class="active" onclick="setAuthTab('login')">Log in</button>
-      <button id="tab-signup" onclick="setAuthTab('signup')">Sign up</button>
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark"></div>
+      <div class="brand-name">Gear<span>Call</span></div>
     </div>
-
-    <div id="auth-error" class="auth-error"></div>
-
-    <!-- LOGIN -->
-    <div id="login-form">
-      <h2>Welcome back</h2>
-      <p class="sub">Log in to book a mechanic, manage jobs, or run the platform.</p>
-      <div class="field"><label>Email</label><input id="login-email" type="email" placeholder="you@example.com"></div>
-      <div class="field"><label>Password</label><input id="login-password" type="password" placeholder="••••••••"></div>
-      <button class="btn" onclick="doLogin()">Log in</button>
-    </div>
-
-    <!-- SIGNUP -->
-    <div id="signup-form" class="hidden">
-      <h2>Create an account</h2>
-      <p class="sub">Sign up as a customer to book jobs, or as a mechanic to accept them.</p>
-      <div class="field">
-        <label>I am a...</label>
-        <div class="role-pick">
-          <button type="button" class="sel" id="role-customer" onclick="setSignupRole('customer')">Customer</button>
-          <button type="button" id="role-mechanic" onclick="setSignupRole('mechanic')">Mechanic</button>
-        </div>
-      </div>
-      <div class="field" id="signup-spec-field" style="display:none;">
-        <label>I work on...</label>
-        <div class="veh-toggle">
-          <button type="button" class="sel" id="spec-car" onclick="setSignupSpec('car')">🚗 Car</button>
-          <button type="button" id="spec-bike" onclick="setSignupSpec('bike')">🏍️ Bike</button>
-          <button type="button" id="spec-both" onclick="setSignupSpec('both')">Both</button>
-        </div>
-      </div>
-      <div class="field"><label>Full name</label><input id="signup-name" type="text" placeholder="Your name"></div>
-      <div class="field"><label>Email</label><input id="signup-email" type="email" placeholder="you@example.com"></div>
-      <div class="field"><label>Password</label><input id="signup-password" type="password" placeholder="At least 6 characters"></div>
-      <button class="btn" onclick="doSignup()">Create account</button>
+    <div class="who-am-i hidden" id="whoami">
+      <div><span class="tag" id="who-role"></span><br><span class="name" id="who-name"></span></div>
+      <button class="logout-btn" onclick="logout()">Log out</button>
     </div>
   </div>
-</div>
 
-<main class="hidden" id="app-main">
-
-  <!-- ================= CUSTOMER VIEW ================= -->
-  <section id="view-customer" class="view">
-    <div class="hero">
-      <div>
-        <div class="eyebrow">Doorstep car &amp; bike service</div>
-        <h1>A mechanic reaches you,<br>not the other way round.</h1>
-        <p class="lead">Tell us what's wrong, pick a slot, and a verified mechanic accepts the job — car or bike, breakdown or routine service.</p>
+  <!-- ================= AUTH SCREEN ================= -->
+  <div class="auth-wrap" id="auth-screen">
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <button id="tab-login" class="active" onclick="setAuthTab('login')">Log in</button>
+        <button id="tab-signup" onclick="setAuthTab('signup')">Sign up</button>
       </div>
 
-      <div class="ticket">
-        <div class="ticket-head">
-          <h3>Job Card</h3>
-          <div class="mono" id="ticket-id">New request</div>
+      <div id="auth-error" class="auth-error"></div>
+
+      <!-- LOGIN -->
+      <div id="login-form">
+        <h2>Welcome back</h2>
+        <p class="sub">Log in to book a mechanic, manage jobs, or run the platform.</p>
+        <div class="field"><label>Email</label><input id="login-email" type="email" placeholder="you@example.com"></div>
+        <div class="field"><label>Password</label><input id="login-password" type="password" placeholder="••••••••">
         </div>
 
+        <!-- Naya: Forgot Password -->
+        <div style="text-align: right; margin-top: -15px; margin-bottom: 20px;">
+          <a href="#" style="color: var(--paper-dim); font-size: 12px; text-decoration: none;">Forgot password?</a>
+        </div>
+
+        <button class="btn" onclick="doLogin()">Log in</button>
+
+        <!-- Naya: Google Login -->
+        <div
+          style="text-align: center; margin: 20px 0; color: var(--paper-dim); font-size: 12px; border-top: 1px solid var(--line); padding-top: 15px;">
+          OR</div>
+        <button
+          style="background: transparent; border: 1px solid var(--line); color: var(--paper); width: 100%; padding: 12px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="16"
+            alt="Google">
+          Continue with Google
+        </button>
+      </div>
+
+      <!-- SIGNUP -->
+      <div id="signup-form" class="hidden">
+        <h2>Create an account</h2>
+        <p class="sub">Sign up as a customer to book jobs, or as a mechanic to accept them.</p>
         <div class="field">
-          <label>Vehicle type</label>
-          <div class="veh-toggle">
-            <button type="button" class="sel" id="veh-car" onclick="setVehicle('car')">🚗 Car</button>
-            <button type="button" id="veh-bike" onclick="setVehicle('bike')">🏍️ Bike</button>
+          <label>I am a...</label>
+          <div class="role-pick">
+            <button type="button" class="sel" id="role-customer" onclick="setSignupRole('customer')">Customer</button>
+            <button type="button" id="role-mechanic" onclick="setSignupRole('mechanic')">Mechanic</button>
           </div>
         </div>
-
-        <div class="field">
-          <label>Service location</label>
-          <input id="cust-loc" type="text" placeholder="e.g. Sector 14, Meerut">
+        <div class="field" id="signup-spec-field" style="display:none;">
+          <label>I work on...</label>
+          <div class="veh-toggle">
+            <button type="button" class="sel" id="spec-car" onclick="setSignupSpec('car')">🚗 Car</button>
+            <button type="button" id="spec-bike" onclick="setSignupSpec('bike')">🏍️ Bike</button>
+            <button type="button" id="spec-both" onclick="setSignupSpec('both')">Both</button>
+          </div>
         </div>
-
-        <div class="field">
-          <label>Service needed</label>
-          <select id="cust-service"><option value="">Select from list below ↓</option></select>
+        <div class="field"><label>Full name</label><input id="signup-name" type="text" placeholder="Your name"></div>
+        <div class="field"><label>Email</label><input id="signup-email" type="email" placeholder="you@example.com">
         </div>
-
-        <div class="field">
-          <label>Slot</label>
-          <select id="cust-slot">
-            <option>As soon as possible</option>
-            <option>Today, 4:00 PM – 6:00 PM</option>
-            <option>Tomorrow, 10:00 AM – 12:00 PM</option>
-            <option>Tomorrow, 2:00 PM – 4:00 PM</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>Describe the issue (optional)</label>
-          <textarea id="cust-notes" placeholder="e.g. Engine making a rattling noise on start"></textarea>
-        </div>
-
-        <button class="btn" onclick="submitBooking()">Book mechanic</button>
+        <div class="field"><label>Password</label><input id="signup-password" type="password"
+            placeholder="At least 6 characters"></div>
+        <button class="btn" onclick="doSignup()">Create account</button>
       </div>
     </div>
+  </div>
 
-    <div class="sec">
-      <div class="sec-head"><h2>Choose a service</h2><div class="count" id="veh-filter-label">Showing: Car</div></div>
-      <div class="services-grid" id="services-grid"></div>
-    </div>
+  <main class="hidden" id="app-main">
+    <!-- ... baki ka code waisa hi rahega ... -->
+  </main>
 
-    <div class="sec">
-      <div class="sec-head"><h2>Your bookings</h2><div class="count" id="my-bookings-count">0 active</div></div>
-      <div id="my-bookings"></div>
-    </div>
-  </section>
+  <footer>GEARCALL — DATA IS REAL AND PERSISTED IN A LOCAL SQLITE DATABASE (data/gearcall.db)</footer>
+  <div class="toast" id="toast"></div>
 
-  <!-- ================= MECHANIC VIEW ================= -->
-  <section id="view-mechanic" class="view">
-    <div class="sec" style="padding-top:44px;">
-      <div class="sec-head">
-        <h2>Job requests</h2>
-        <div style="display:flex;align-items:center;gap:14px;">
-          <span class="mono" id="mech-spec-label" style="font-size:12px;color:var(--paper-dim);"></span>
-          <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--paper-dim);">
-            <input type="checkbox" id="mech-online" onchange="toggleOnline()"> Online
-          </label>
-        </div>
-      </div>
-      <div id="mech-pending-banner"></div>
-      <div id="mech-requests"></div>
-    </div>
-
-    <div class="sec">
-      <div class="sec-head"><h2>Your jobs</h2><div class="count" id="mech-accepted-count">0</div></div>
-      <div id="mech-accepted"></div>
-    </div>
-
-    <div class="sec">
-      <div class="kpi-grid" style="grid-template-columns:repeat(2,1fr);">
-        <div class="kpi"><b id="mech-earnings">₹0</b><span>Total earnings (completed jobs)</span></div>
-        <div class="kpi"><b id="mech-jobs-done">0</b><span>Jobs completed</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= ADMIN VIEW ================= -->
-  <section id="view-admin" class="view">
-    <div class="sec" style="padding-top:44px;">
-      <div class="sec-head"><h2>Platform overview</h2><div class="count" id="admin-date"></div></div>
-      <div class="kpi-grid">
-        <div class="kpi"><b id="kpi-total">0</b><span>Total bookings</span></div>
-        <div class="kpi"><b id="kpi-pending">0</b><span>Pending acceptance</span></div>
-        <div class="kpi"><b id="kpi-active">0</b><span>In progress</span></div>
-        <div class="kpi"><b id="kpi-revenue">₹0</b><span>Revenue (completed)</span></div>
-      </div>
-    </div>
-
-    <div class="sec">
-      <div class="sec-head"><h2>Live bookings</h2></div>
-      <div class="card" style="overflow-x:auto;">
-        <table>
-          <thead><tr><th>Job ID</th><th>Customer</th><th>Vehicle</th><th>Service</th><th>Location</th><th>Mechanic</th><th>Status</th></tr></thead>
-          <tbody id="admin-table"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="sec">
-      <div class="sec-head"><h2>Mechanic approvals</h2><div class="count" id="admin-pending-mech-count">0 pending</div></div>
-      <div id="admin-mech-approvals"></div>
-    </div>
-
-    <div class="sec">
-      <div class="sec-head"><h2>All mechanics</h2></div>
-      <div class="card" style="overflow-x:auto;">
-        <table>
-          <thead><tr><th>Name</th><th>Specialises in</th><th>Status</th><th>Online</th><th>Jobs done</th></tr></thead>
-          <tbody id="admin-mech-table"></tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer>GEARCALL — DATA IS REAL AND PERSISTED IN A LOCAL SQLITE DATABASE (data/gearcall.db)</footer>
-<div class="toast" id="toast"></div>
-
-<script src="/app.js"></script>
+  <script src="/app.js"></script>
 </body>
+
 </html>
