@@ -1,0 +1,15 @@
+{
+  "name": "gearcall-backend",
+  "version": "1.0.0",
+  "description": "GearCall mechanic booking platform — zero-dependency Node.js backend with SQLite and login.",
+  "main": "server.js",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node --experimental-sqlite server.js",
+    "dev": "node --experimental-sqlite --watch server.js"
+  },
+  "license": "MIT",
+  "dependencies": {}
+}
