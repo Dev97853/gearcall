@@ -1,0 +1,17 @@
+{
+  "name": "gearcall-backend",
+  "version": "1.0.0",
+  "description": "GearCall mechanic booking platform — Node.js backend with Turso (libSQL) and login.",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node --env-file=.env server.js",
+    "dev": "node --env-file=.env --watch server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@libsql/client": "^0.14.0"
+  }
+}
